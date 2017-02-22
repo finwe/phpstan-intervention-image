@@ -1,8 +1,8 @@
 # Intervention\Image extensions for PHPStan
 
-[![Build Status](https://travis-ci.org/phpstan/phpstan-doctrine.svg)](https://travis-ci.org/finwe/phpstan-intervention-image)
-[![Latest Stable Version](https://poser.pugx.org/phpstan/phpstan-doctrine/v/stable)](https://packagist.org/packages/finwe/phpstan-intervention-image)
-[![License](https://poser.pugx.org/phpstan/phpstan-doctrine/license)](https://packagist.org/packages/finwe/phpstan-intervention-image)
+[![Build Status](https://travis-ci.org/finwe/phpstan-intervention-image.svg)](https://travis-ci.org/finwe/phpstan-intervention-image)
+[![Latest Stable Version](https://poser.pugx.org/finwe/phpstan-intervention-image/v/stable)](https://packagist.org/packages/finwe/phpstan-intervention-image)
+[![License](https://poser.pugx.org/finwe/phpstan-intervention-image/license)](https://packagist.org/packages/finwe/phpstan-intervention-image)
 
 * [PHPStan](https://github.com/phpstan/phpstan)
 * [Intervention\Image](http://image.intervention.io/)
