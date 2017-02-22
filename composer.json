@@ -1,0 +1,19 @@
+{
+    "name": "finwe/phpstan-intervention-image",
+    "description": "PHPStan extension for Intervention/image",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matěj Humpál",
+            "email": "finwe@finwe.info"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "Finwe\\": ["src/"]
+        }
+    },
+
+    "require": {}
+}

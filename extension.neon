@@ -1,0 +1,7 @@
+parameters:
+
+services:
+	-
+		class: Finwe\PHPStan\Intervention\Image\Reflection\InterventionImageMethodsClassReflectionExtension
+		tags:
+			- phpstan.broker.methodsClassReflectionExtension
