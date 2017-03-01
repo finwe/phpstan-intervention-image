@@ -8,14 +8,12 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\MethodsClassReflectionExtension;
 use PHPStan\Reflection\ParameterReflection;
-use PHPStan\Type\ArrayType;
 use PHPStan\Type\CallableType;
 use PHPStan\Type\FloatType;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\ThisType;
-use PHPStan\Type\TrueOrFalseBooleanType;
 use PHPStan\Type\Type;
 
 class InterventionImageMethodsClassReflectionExtension implements MethodsClassReflectionExtension
@@ -26,19 +24,19 @@ class InterventionImageMethodsClassReflectionExtension implements MethodsClassRe
 	public function __construct()
 	{
 		$this->methods = [
-			'brightness' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->ip('level', FALSE)], FALSE],
-			'contrast' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->ip('level', FALSE)], FALSE],
-			'crop' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->ip('width', FALSE), $this->ip('height', FALSE), $this->ip('x'), $this->ip('y')], FALSE],
-			'encode' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->mp('format'), $this->ip('quality')], FALSE],
-			'exif' => [new MixedType(), FALSE, FALSE, TRUE, [$this->ip('key')], FALSE],
-			'fit' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->ip('width', FALSE), $this->ip('height'), $this->cp('callback'), $this->sp('position')], FALSE],
-			'greyscale' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [], FALSE],
-			'height' => [new IntegerType(TRUE), FALSE, FALSE, TRUE, [], FALSE],
-			'heighten' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->ip('height', FALSE), $this->cp('callback')], FALSE],
-			'resize' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->ip('width', FALSE), $this->ip('height', FALSE), $this->cp('callback')], FALSE],
-			'rotate' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->fp('angle'), $this->sp('bgcolor')], FALSE],
-			'widen' => [new ThisType(Image::class, FALSE), FALSE, FALSE, TRUE, [$this->ip('width', FALSE), $this->cp('callback')], FALSE],
-			'width' => [new IntegerType(TRUE), FALSE, FALSE, TRUE, [], FALSE],
+			'brightness' => [new ThisType(Image::class, false), false, false, true, [$this->ip('level', false)], false],
+			'contrast' => [new ThisType(Image::class, false), false, false, true, [$this->ip('level', false)], false],
+			'crop' => [new ThisType(Image::class, false), false, false, true, [$this->ip('width', false), $this->ip('height', false), $this->ip('x'), $this->ip('y')], false],
+			'encode' => [new ThisType(Image::class, false), false, false, true, [$this->mp('format'), $this->ip('quality')], false],
+			'exif' => [new MixedType(), false, false, true, [$this->ip('key')], false],
+			'fit' => [new ThisType(Image::class, false), false, false, true, [$this->ip('width', false), $this->ip('height'), $this->cp('callback'), $this->sp('position')], false],
+			'greyscale' => [new ThisType(Image::class, false), false, false, true, [], false],
+			'height' => [new IntegerType(true), false, false, true, [], false],
+			'heighten' => [new ThisType(Image::class, false), false, false, true, [$this->ip('height', false), $this->cp('callback')], false],
+			'resize' => [new ThisType(Image::class, false), false, false, true, [$this->ip('width', false), $this->ip('height', false), $this->cp('callback')], false],
+			'rotate' => [new ThisType(Image::class, false), false, false, true, [$this->fp('angle'), $this->sp('bgcolor')], false],
+			'widen' => [new ThisType(Image::class, false), false, false, true, [$this->ip('width', false), $this->cp('callback')], false],
+			'width' => [new IntegerType(true), false, false, true, [], false],
 		];
 	}
 
@@ -57,7 +55,6 @@ class InterventionImageMethodsClassReflectionExtension implements MethodsClassRe
 
 	private function returnMethodImplementation(Type $returnType, ClassReflection $declaringClass, bool $static, bool $private, bool $public, string $name, array $parameters, bool $variadic): MethodReflection
 	{
-
 		return new class($returnType, $declaringClass, $static, $private, $public, $name, $parameters, $variadic) implements MethodReflection
 		{
 
@@ -125,39 +122,29 @@ class InterventionImageMethodsClassReflectionExtension implements MethodsClassRe
 		};
 	}
 
-	private function sp(string $name, $optional = TRUE)
+	private function sp(string $name, $optional = true)
 	{
-		return $this->createParameterInstance(new StringType(FALSE), $name, $optional, FALSE, FALSE);
+		return $this->createParameterInstance(new StringType(false), $name, $optional, false, false);
 	}
 
-	private function ip(string $name, $optional = TRUE)
+	private function ip(string $name, $optional = true)
 	{
-		return $this->createParameterInstance(new IntegerType(FALSE), $name, $optional, FALSE, FALSE);
+		return $this->createParameterInstance(new IntegerType(false), $name, $optional, false, false);
 	}
 
-	private function bp(string $name, $optional = TRUE)
+	private function fp(string $name, $optional = true)
 	{
-		return $this->createParameterInstance(new TrueOrFalseBooleanType(FALSE), $name, $optional, FALSE, FALSE);
+		return $this->createParameterInstance(new FloatType(false), $name, $optional, false, false);
 	}
 
-	private function fp(string $name, $optional = TRUE)
+	private function mp(string $name, $optional = true)
 	{
-		return $this->createParameterInstance(new FloatType(FALSE), $name, $optional, FALSE, FALSE);
+		return $this->createParameterInstance(new MixedType(), $name, $optional, false, false);
 	}
 
-	private function ap(string $name, $optional = TRUE)
+	private function cp(string $name, $optional = true)
 	{
-		return $this->createParameterInstance(new ArrayType(new MixedType(), FALSE), $name, $optional, FALSE, FALSE);
-	}
-
-	private function mp(string $name, $optional = TRUE)
-	{
-		return $this->createParameterInstance(new MixedType(), $name, $optional, FALSE, FALSE);
-	}
-
-	private function cp(string $name, $optional = TRUE)
-	{
-		return $this->createParameterInstance(new CallableType(TRUE), $name, $optional, FALSE, FALSE);
+		return $this->createParameterInstance(new CallableType(true), $name, $optional, false, false);
 	}
 
 	private function createParameterInstance(Type $type, string $name, bool $optional, bool $passedByReference, bool $variadic)
